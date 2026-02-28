@@ -1,48 +1,30 @@
-from ai_client import generate_response
+from ai_client import call_llm
 
-
-def run_analyzer_agent(user_input, previous_output):
-    """
-    Analyzer Agent:
-    Reviews and upgrades content/strategy output.
-    Acts as a 15+ year senior performance marketing analyst.
-    """
-
+def final_review(full_output):
     prompt = f"""
-You are a Senior Marketing Performance Analyst with 15+ years of experience 
-working with global brands and high-growth startups.
+You are a senior performance marketing reviewer with 15+ years experience.
 
-Your job is to deeply analyze and refine the given marketing output.
+Your role is to lightly refine the content.
 
-You must:
+Improve only:
+- Clarity
+- Flow
+- Sharpness
+- Professional tone
 
-- Improve clarity
-- Improve persuasion
-- Improve conversion potential
-- Improve emotional trigger
-- Improve positioning
-- Remove generic AI-style writing
-- Make it sound premium and strategic
-- Ensure it does not look like GPT-generated content
-- Make it practical and implementable
+Do NOT:
+- Add new ideas
+- Expand sections
+- Change structure
+- Increase length significantly
+- Rewrite everything
 
-User Request:
-{user_input}
+Keep original headings intact.
+Keep response under 220 words.
 
-Generated Output:
-{previous_output}
+Deliver final improved version only.
 
-Now:
-1. Analyze weaknesses.
-2. Improve structure.
-3. Upgrade tone to expert level.
-4. Add conversion psychology if missing.
-5. Deliver final upgraded version only.
-
-Do NOT explain what you are doing.
-Do NOT mention AI.
-Return final refined professional output.
+Content:
+{full_output}
 """
-
-    response = generate_response(prompt)
-    return response
+    return call_llm(prompt, 300)
