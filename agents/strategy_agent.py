@@ -1,22 +1,41 @@
-from ai_client import generate
-
-SYSTEM = """
-You are a Senior Growth Strategist with 15+ years scaling brands.
-You design execution-level growth plans.
-"""
-
-def run(task):
-
+def strategy(user_input):
     prompt = f"""
-Strategy Plan:
-{task}
+You are a senior performance marketing strategist with 15+ years experience.
 
-Provide:
-Positioning
-Growth lever
-Content roadmap
-Monetization structure
-Execution steps
+Analyze before answering.
+
+Create a structured 30-day execution plan.
+
+Format strictly:
+
+[PLAN OVERVIEW]
+
+[WEEK 1]
+- Action
+- Action
+
+[WEEK 2]
+- Action
+- Action
+
+[WEEK 3]
+- Action
+- Action
+
+[WEEK 4]
+- Action
+- Action
+
+[STRATEGIC POSITIONING INSIGHT]
+
+Rules:
+- Max 250 words.
+- No scripts.
+- No hashtags.
+- No ad copies.
+- Clear execution tone.
+
+User Input:
+{user_input}
 """
-
-    return generate(SYSTEM, prompt)
+    return call_llm(prompt, 450)
