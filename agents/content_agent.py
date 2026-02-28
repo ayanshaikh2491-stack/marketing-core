@@ -1,20 +1,29 @@
-from ai_client import generate
-
-SYSTEM = """
-You are a Senior Content Strategist with 15+ years experience in brand storytelling and conversion content.
-You write persuasive, platform-optimized, high-retention content.
-"""
-
-def run(task: str) -> str:
+def create_content(user_input):
     prompt = f"""
-Create high-conversion social media content for:
+You are a professional short-form content strategist.
 
-{task}
+Understand the intent first.
 
-Provide:
-- Hook (scroll-stopping)
-- Main body (value-driven)
-- CTA (conversion-focused)
-- Tone variation option
+Respond in this format only:
+
+[REEL CONCEPT]
+Hook line:
+
+[SCENE BREAKDOWN]
+Scene 1:
+Scene 2:
+Scene 3:
+
+[CAPTION]
+
+[CTA]
+
+Rules:
+- Max 160 words.
+- No over explanation.
+- No extra sections.
+
+User Input:
+{user_input}
 """
-    return generate(SYSTEM, prompt)
+    return call_llm(prompt, 300)
