@@ -1,22 +1,31 @@
-from ai_client import generate
+from ai_client import call_llm
 
-SYSTEM = """
-You are a Senior Market Intelligence Consultant with 15+ years of global growth experience.
-You provide deep commercial insights, not generic information.
-"""
-
-def run(task):
-
+def research(user_input):
     prompt = f"""
-Research Requirement:
-{task}
+You are a senior market intelligence expert with 15+ years of experience scaling local and digital brands.
 
-Provide:
-Market gap
-Competitor weakness
-Revenue angle
-Hidden risk
-Opportunity leverage
+First internally analyze the user request carefully.
+Understand business type, market position, competition level, and intent.
+
+Then respond in this exact format:
+
+[MARKET REALITY]
+Current industry situation (concise).
+
+[AUDIENCE PATTERN]
+Who they are, what they care about.
+
+[COMPETITIVE SIGNAL]
+What competitors are likely doing.
+
+Rules:
+- Max 150 words.
+- No strategy.
+- No ads.
+- No motivational talk.
+- Be sharp and realistic.
+
+User Request:
+{user_input}
 """
-
-    return generate(SYSTEM, prompt)
+    return call_llm(prompt, 350)
